@@ -1,11 +1,14 @@
 
 
+using IIBSASTHA.Models;
 using IIBSASTHA.StartupExtension;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<Users>();
 
 builder.Services.AddDatabaseExtensionHelper(builder.Configuration); // Database Configuration
 
@@ -21,11 +24,15 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+//app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
